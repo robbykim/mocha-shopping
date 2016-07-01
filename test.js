@@ -13,7 +13,7 @@ var storage = server.storage;
 // chai is prompted to use http extension
 chai.use(chaiHttp);
 
-// test description
+// writes test for the GET function
 describe('Shopping List', function () {
   it('should list items on GET', function (done) {
     chai.request(app)
@@ -22,6 +22,7 @@ describe('Shopping List', function () {
         should.equal(err, null);
         res.should.have.status(200);
         res.should.be.json;
+        // res.body is items array [{}, {}, {}]
         res.body.should.be.a('array');
         res.body.should.have.length(3);
         res.body[0].should.be.a('object');
@@ -46,6 +47,7 @@ describe('Shopping List', function () {
         should.equal(err, null);
         res.should.have.status(201);
         res.should.be.json;
+        // res.body is the item that was added {name: "", id: #}
         res.body.should.be.a('object');
         res.body.should.have.property('name');
         res.body.should.have.property('id');
@@ -76,6 +78,7 @@ describe('Shopping List', function () {
         should.equal(err, null);
         res.should.have.status(200);
         res.should.be.json;
+        // res.body is the edited item {name: "", id: #}
         res.body.should.be.a('object');
         res.body.should.have.property('name');
         res.body.should.have.property('id');
@@ -101,6 +104,7 @@ describe('Shopping List', function () {
         should.equal(err, null);
         res.should.have.status(200);
         res.should.be.json;
+        // res.body is the deleted object {name: '', id: #}
         res.body.should.be.a('object');
         res.body.should.have.property('name');
         res.body.should.have.property('id');
