@@ -19,7 +19,7 @@ Storage.prototype.add = function (name) {
 
 // DELETE METHOD we added to delete items
 Storage.prototype.delete = function (index) {
-  var deleted = this.items.splice(index, 1);
+  var deleted = this.items.splice(index, 1)[0];
   return deleted;
 };
 
@@ -70,7 +70,6 @@ app.delete('/items/:id', function (req, res) {
 
 app.put('/items/:id', jsonParser, function (req, res) {
   var id = parseInt(req.params.id);
-//  console.log(req.body);
   if (!req.body) {
     return res.sendStatus(400);
   }
