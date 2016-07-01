@@ -26,11 +26,14 @@ Storage.prototype.delete = function (index) {
 // EDITING METHOD we added
 Storage.prototype.put = function (index, reqName) {
   this.items[index].name = reqName;
-  return this.items[index].name;
+  return this.items[index];
 };
 
 // ADDING items to list
 var storage = new Storage();
+storage.add('Broad beans');
+storage.add('Tomatoes');
+storage.add('Peppers');
 
 // USE CONSTRUCTORS to create OBJECTS
 var app = express();
