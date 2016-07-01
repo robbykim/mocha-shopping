@@ -70,7 +70,7 @@ app.delete('/items/:id', function (req, res) {
 
 app.put('/items/:id', jsonParser, function (req, res) {
   var id = parseInt(req.params.id);
-  console.log(req.body);
+//  console.log(req.body);
   if (!req.body) {
     return res.sendStatus(400);
   }
