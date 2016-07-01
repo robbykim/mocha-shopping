@@ -96,7 +96,7 @@ describe('Shopping List', function () {
 
   it('should delete an item on delete', function (done) {
     chai.request(app)
-      .delete('/items/0')
+      .delete('/items/1')
       .end(function (err, res) {
         should.equal(err, null);
         res.should.have.status(200);
@@ -106,9 +106,12 @@ describe('Shopping List', function () {
         res.body.should.have.property('id');
         res.body.name.should.be.a('string');
         res.body.id.should.be.a('number');
-        res.body.id.should.equal(0);
-        res.body.name.should.equal('cereal');
+        res.body.id.should.equal(1);
+        res.body.name.should.equal('Tomatoes');
         storage.items.length.should.equal(3);
+        storage.items[0].name.should.equal('cereal');
+        storage.items[1].name.should.equal('Peppers');
+        storage.items[2].name.should.equal('Kale');
         done();
       });
   });
