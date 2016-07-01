@@ -70,7 +70,10 @@ app.delete('/items/:id', function (req, res) {
 
 app.put('/items/:id', jsonParser, function (req, res) {
   var id = parseInt(req.params.id);
-  if (!req.body) {
+  if (typeof(req.body) !== 'object') {
+    return res.sendStatus(400);
+  }
+  if (!req.body.name) {
     return res.sendStatus(400);
   }
   for (var i = 0; i < storage.items.length; i++) {
