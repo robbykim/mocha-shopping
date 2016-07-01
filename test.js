@@ -117,7 +117,7 @@ describe('Shopping List', function () {
         storage.items[1].name.should.equal('Peppers');
         storage.items[2].name.should.equal('Kale');
         done();
-      });  
+      });
   });
 
   it('should fail gracefully when PUT request body is empty', function (done) {
@@ -130,7 +130,43 @@ describe('Shopping List', function () {
         storage.items[2].name.should.equal('Kale');
         storage.items[2].id.should.equal(3);
         done();
-      })
+      });
+  });
 
-  })
+  it('should fail gracefully when PUT request body is not json', function (done) {
+    chai.request(app)
+      .put('/items/2')
+      .send('test')
+      .end(function (err, res) {
+        should.not.equal(err, null);
+        res.should.have.status(400);
+        storage.items[2].name.should.equal('Kale');
+        storage.items[2].id.should.equal(3);
+        done();
+      });
+  });
+
+  it('should fail gracefully when POST request body is empty', function (done) {
+    chai.request(app)
+      .post('/items')
+      .send()
+      .end(function (err, res) {
+        should.not.equal(err, null);
+        res.should.have.status(400);
+        storage.items.length.should.equal(3);
+        done();
+      });
+  });
+
+  it('should fail gracefully when POST request body is not json', function (done) {
+    chai.request(app)
+      .post('/items')
+      .send('test')
+      .end(function (err, res) {
+        should.not.equal(err, null);
+        res.should.have.status(400);
+        storage.items.length.should.equal(3);
+        done();
+      });
+  });
 });

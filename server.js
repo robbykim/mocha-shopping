@@ -49,7 +49,10 @@ app.get('/items', function (req, res) {
 
 // Data is formatted and parsed through body-parser (JSON format)
 app.post('/items', jsonParser, function (req, res) {
-  if (!req.body) {
+  if (typeof (req.body) !== 'object') {
+    return res.sendStatus(400);
+  }
+  if (!req.body.name) {
     return res.sendStatus(400);
   }
 
@@ -70,7 +73,7 @@ app.delete('/items/:id', function (req, res) {
 
 app.put('/items/:id', jsonParser, function (req, res) {
   var id = parseInt(req.params.id);
-  if (typeof(req.body) !== 'object') {
+  if (typeof (req.body) !== 'object') {
     return res.sendStatus(400);
   }
   if (!req.body.name) {
