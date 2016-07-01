@@ -80,4 +80,7 @@ app.put('/items/:id', jsonParser, function (req, res) {
   return res.sendStatus(400);
 });
 
+exports.app = app;
+exports.storage = storage;
+
 app.listen(process.env.PORT || 8080);
